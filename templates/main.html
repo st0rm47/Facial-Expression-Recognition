@@ -1,0 +1,89 @@
+{% extends "base.html" %} 
+{% block title %} Facial Expression Technologies {%endblock %} 
+{% block content %}
+<!-- Start Header -->
+<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark">
+  <div class="container">
+    <a class="navbar-brand">Techno</a>
+    <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+      <li class="nav-item active">
+        <a class="nav-link">Home</a>
+      </li>
+      <li><a class="nav-link" href="demo.html">Demo</a></li>
+      <li><a class="nav-link" href="#about" accesskey="a">About us</a></li>
+    </ul>
+  </div>
+</nav>
+<!-- End Header -->
+
+<!-- Start HERO Section -->
+<div class="hero">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-lg-5">
+        <div class="intro-excerpt">
+          <h1>Face Tracking, Analysis and Recognition</h1>
+          <p>
+            <a href="demo.html" class="btn btn-secondary btn-lg">Try out Demo</a
+            >
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="hero-img-wrap">
+          <img src="static/images/facial-hero1.png" class="img-fluid" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Hero Section -->
+
+<!-- Start About Us Section -->
+<div class="about-section" aria-labelledby="about">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-6">
+        <h2 class="section-title" id= "about">About Us</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+        <div class="post-entry">
+          <a href="#" class="post-thumbnail"
+            ><img src="static/images/post-1.jpg" alt="Image" class="img-fluid"/></a>
+          <div class="post-content-entry">
+            <h3><a href="#" class="nav-link">Priyanka Thapa</a></h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+        <div class="post-entry">
+          <a href="#" class="post-thumbnail"
+            ><img src="static/images/post-2.jpg" alt="Image" class="img-fluid"
+          /></a>
+          <div class="post-content-entry">
+            <h3><a href="#" class="nav-link">Subodh Ghimire</a></h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+        <div class="post-entry">
+          <a href="#" class="post-thumbnail"
+            ><img src="static/images/post-3.jpg" alt="Image" class="img-fluid"
+          /></a>
+          <div class="post-content-entry">
+            <h3><a href="#" class="nav-link" >Rohan Basnet</a></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End About Us Section -->
+
+
+{% endblock %}
