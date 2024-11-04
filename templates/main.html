@@ -7,9 +7,9 @@
     <a class="navbar-brand">Techno</a>
     <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
       <li class="nav-item active">
-        <a class="nav-link">Home</a>
+        <a class="nav-link" href="{{url_for('index')}}" >Home</a>
       </li>
-      <li><a class="nav-link" href="demo.html">Demo</a></li>
+      <li><a class="nav-link" href="{{ url_for('demo') }}">Demo</a></li>
       <li><a class="nav-link" href="#about" accesskey="a">About us</a></li>
     </ul>
   </div>
@@ -24,7 +24,7 @@
         <div class="intro-excerpt">
           <h1>Face Tracking, Analysis and Recognition</h1>
           <p>
-            <a href="demo.html" class="btn btn-secondary btn-lg">Try out Demo</a
+            <a href="{{url_for('demo')}}" class="btn btn-secondary btn-lg">Try out Demo</a
             >
           </p>
         </div>
