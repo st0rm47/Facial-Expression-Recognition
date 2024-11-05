@@ -1,0 +1,48 @@
+{% extends "base.html" %} 
+{% block title %} Live Demo {%endblock %} 
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/video.css') }}"/>
+
+<!-- Start Header -->
+<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark">
+  <div class="container">
+    <a class="navbar-brand">Techno</a>
+    <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+      <li><a class="nav-link" href="{{url_for('index')}}">Home</a></li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('demo') }}">Demo</a>
+      </li>
+      <li>
+        <a class="nav-link" href="{{url_for('index')}}#about" accesskey="a">About us</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- End Header -->
+
+<!-- Demo -->
+<div class="main-content">
+  <div id="camera-container">
+    <h2>Camera Feed</h2>
+    <img
+      id="videoElement"
+      src="{{ url_for('video_feed') }}"
+      alt="Camera Feed"/>
+  </div>
+  <div id="info-container">
+    <h2>Information</h2>
+    <p>
+      Here is where you can display any information related to the camera feed.
+    </p>
+    <p>For example:</p>
+    <ul>
+      <li>Detected Emotion: Happy</li>
+      <li>Time: <span id="time"></span></li>
+      <li>Status: Active</li>
+    </ul>
+  </div>
+</div>
+<!-- End Demo -->
+
+<script src="{{ url_for('static', filename='js/video.js') }}"></script>
+{% endblock %}

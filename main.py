@@ -1,6 +1,7 @@
 import cv2
-from keras.models import load_model
+from tensorflow import load_model
 import numpy as np
+
 
 # Load the entire model
 model = load_model("fer.h5")
