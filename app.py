@@ -3,30 +3,31 @@ from keras.models import load_model
 import numpy as np
 from flask import Flask, request, jsonify, render_template
 import base64
+from transformers import AutoImageProcessor, AutoModelForImageClassification
+
 
 app = Flask(__name__, template_folder='templates', static_folder='static', static_url_path='/static')   
 
-# Load the emotion detection model
-model = load_model("fer.h5")
+# # Load the emotion detection model
+# model = load_model("fer.h5")
+
+# Load model directly
+processor = AutoImageProcessor.from_pretrained("motheecreator/vit-Facial-Expression-Recognition")
+model = AutoModelForImageClassification.from_pretrained("motheecreator/vit-Facial-Expression-Recognition")
+
 
 # Haar cascade for face detection
 haar_file = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(haar_file)
 
 # Labels for emotion prediction
-labels = {0: 'Angry', 
-          1: 'Disgust', 
-          2: 'Fear', 
-          3: 'Happy', 
-          4: 'Neutral', 
-          5: 'Sad', 
-          6: 'Surprise'}
+labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
-# Function to extract features
-def extract_features(image):
-    feature = np.array(image)
-    feature = feature.reshape(1, 48, 48, 1)
-    return feature / 255.0
+# Function to process the image for ViT model
+def process_image_for_vit(image):
+    # Preprocess the image using the ViT processor
+    inputs = processor(images=image, return_tensors="pt")
+    return inputs
 
 # Route to render the main page
 @app.route('/')
@@ -51,11 +52,17 @@ def process_frame():
     response = {'success': False}
     if len(faces) > 0:
         for (p, q, r, s) in faces:
-            face_img = gray[q:q + s, p:p + r]
-            face_img = cv2.resize(face_img, (48, 48))
-            img = extract_features(face_img)
-            pred = model.predict(img)
-            prediction_label = labels[pred.argmax()]
+            face_img = im[q:q + s, p:p + r]
+            face_img = cv2.resize(face_img, (224, 224))
+            # Process image for ViT model
+            inputs = process_image_for_vit(face_img)
+            
+            # Predict using the ViT model
+            outputs = model(**inputs)
+            pred = outputs.logits.argmax(-1).item()
+            
+            # Map prediction to emotion label
+            prediction_label = labels[pred]
             response = {'emotion': prediction_label, 'success': True}
             break
     else:
