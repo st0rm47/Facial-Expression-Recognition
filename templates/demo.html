@@ -1,15 +1,8 @@
 {% extends "base.html" %}
 {% block title %} Demo {% endblock %}
 {% block content %}
-<style>
-  body {
-    background-image: url('static/images/background.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;  
-    background-size: cover; 
-    background-color: #808080;
-}
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/video.css') }}"/>
+
 <!-- Start Header -->
 <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark">
     <div class="container">
@@ -24,21 +17,23 @@
   </nav>
   <!-- End Header -->
 
-<!-- Start HERO Section -->
-<div class="hero1">
-    <div class="container">
-      <div class="row justify-content-between">
-        <div class="col-lg-5">
-          <div class="intro-excerpt">
-            <h1>Try out Live Demos</h1>
-            <p>
-              <a href="{{url_for('video_feed')}}" class="btn btn-secondary btn-lg">Try out Demo</a
-              >
-            </p>
-          </div>
-        </div>
+<!-- Demo -->
+<div class="a1">
+  <div class="container">
+    <div class="main-content">
+      <div id="camera-container">
+        <h1>Live Feed</h1>
+        <video id="videoElement" autoplay alt="Camera Feed" />
+      </div>
+      <div class="info">
+        <p>Detected Emotion: Happy</p>
+        <p>Time: <span id="time"></span></p>
+        <p>Status: Active</p>
       </div>
     </div>
   </div>
-  <!-- End Hero Section -->
+</div>
+<!-- End Demo -->
+
+<script src="{{ url_for('static', filename='js/video.js') }}"></script>
 {% endblock %}

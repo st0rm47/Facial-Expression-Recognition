@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -7,42 +9,91 @@ body {
   background-color: #333;
 }
 
+body {
+    background-image: url('../images/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover; 
+    background-color: #333333;
+}
 
+/*Outer Container*/
+.a1 {
+  display: flex;
+  flex-direction: column;
+  height: 800px;
+  padding: 20px;
+}
+
+/* Camera feed video styling */
+.a1 video {
+  width: 1000px;
+  height: 600px;
+  border: 1px solid #ffffff;
+  object-fit: cover;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.a1 h1 {
+  padding : 20px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  margin : 0;
+
+}
+
+.a1 p {
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 30px;
+  text-align: center;
+}
 /* Container for camera feed and information */
-.main-content {
+.a1 .main-content {
   display: flex;
   flex: 1;
   gap: 20px;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
+  padding-top: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: stretch;
 }
 
+
+
 /* Camera feed container */
-#camera-container {
+.a1 .camera-container {
   flex: 3;
   padding-right: 20px;
   border-radius: 8px;
 }
 
-#videoElement {
+.a1 .videoElement {
   width: 100%;
-  border-radius: 8px;
+  height: 100%;
+  border-radius: 15px;
+  box-sizing: border-box;
 }
 
 /* Information container */
-#info-container {
-  flex: 1;
-  padding: 20px;
-  background-color: #f3f3f3;
-  border-left: 2px solid #ddd;
+.a1 .info {
+  background-color: #787878;
+  border: 1px solid #28282815;
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 15px;
   overflow-y: auto;
-  height : 100%;
-  border-radius: 8px;
+  width: 350px;
+  height: 600px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 85px;
+  
 }
 
-h2 {
-  color: #333;
-  margin-top: 0;
-}
+
