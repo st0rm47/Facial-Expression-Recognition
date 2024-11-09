@@ -1,0 +1,12 @@
+numpy
+pandas
+keras
+tensorflow
+tqdm
+opencv-python
+jupyter notebook
+scikit-learn
+flask
+
+
+

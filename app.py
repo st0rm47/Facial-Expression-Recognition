@@ -3,17 +3,12 @@ from keras.models import load_model
 import numpy as np
 from flask import Flask, request, jsonify, render_template
 import base64
-from transformers import AutoImageProcessor, AutoModelForImageClassification
 
 
 app = Flask(__name__, template_folder='templates', static_folder='static', static_url_path='/static')   
 
 # Load the emotion detection model
-model = load_model("fer.h5")
-
-# # Load model directly
-# processor = AutoImageProcessor.from_pretrained("motheecreator/vit-Facial-Expression-Recognition")
-# model = AutoModelForImageClassification.from_pretrained("motheecreator/vit-Facial-Expression-Recognition")
+model = load_model("fer.h5")            # Change the name of the model file if you have saved it with a different name
 
 
 # Haar cascade for face detection
@@ -22,12 +17,6 @@ face_cascade = cv2.CascadeClassifier(haar_file)
 
 # Labels for emotion prediction
 labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
-
-# # Function to process the image for ViT model
-# def process_image_for_vit(image):
-#     # Preprocess the image using the ViT processor
-#     inputs = processor(images=image, return_tensors="pt")
-#     return inputs
 
 # Function to process the image for  model
 def extract_features(image):

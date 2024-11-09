@@ -10,6 +10,12 @@ The model is a Convolutional Neural Network. It consists of 3 Convolutional laye
 ## Usage
 1. Clone the repository
 2. Install the required libraries using `pip install -r requirements.txt`
-3. Run `train.py` to train the model
+3. Run `FER.ipynb` to train the model
+4. Run `app.py` to start the application
 
- 
+
+
+
+
+
+
