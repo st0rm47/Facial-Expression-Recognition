@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emotion Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Emotion Report for {{ username }}</h2>
+        <ul>
+            {% for emotion, count in emotion_counts.items() %}
+                <li><strong>{{ emotion }}</strong>: {{ count }}</li>
+            {% endfor %}
+        </ul>
+        <br>
+        <a href="/demo">Back to Demo</a> | <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>
