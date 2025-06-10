@@ -47,32 +47,25 @@ def extract_features(image):
     image = np.array(image).reshape(1, 48, 48, 1) / 255.0
     return image
 
-# -------- Routes -------- #
 
+from functools import wraps
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            flash("You must be logged in to access this page.")
+            return redirect(url_for('login_page'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+# -------- Routes -------- #
 @app.route('/')
-def home():
+def login_page():
     return render_template('login.html')
 
-@app.route('/register', methods=['GET','POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = generate_password_hash(request.form['password'])
-
-        conn = sqlite3.connect("database.db")
-        c = conn.cursor()
-        try:
-            c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
-            conn.commit()
-            flash('Account created. Please login.')
-            return redirect(url_for('home'))
-        except sqlite3.IntegrityError:
-            flash('Username already exists.')
-        finally:
-            conn.close()
-    return render_template('register.html')
-
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     username = request.form['username']
     password = request.form['password']
@@ -86,17 +79,43 @@ def login():
     if user and check_password_hash(user[1], password):
         session['user_id'] = user[0]
         session['username'] = username
-        return redirect(url_for('demo'))
+        return redirect(url_for('home'))
     else:
         flash('Invalid login')
-        return redirect(url_for('home'))
+        return redirect(url_for('login_page'))
+    
+@app.route('/register', methods=['GET','POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = generate_password_hash(request.form['password'])
+
+        conn = sqlite3.connect("database.db")
+        c = conn.cursor()
+        try:
+            c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+            conn.commit()
+            flash('Account created. Please login.')
+            return redirect(url_for('register'))
+        except sqlite3.IntegrityError:
+            flash('Username already exists.')
+        finally:
+            conn.close()
+            
+    return render_template('register.html')
+
+@app.route('/home')
+@login_required
+def home():
+    return render_template('main.html')
 
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('home'))
+    return redirect(url_for('login_page'))
 
 @app.route('/demo')
+@login_required
 def demo():
     if 'user_id' not in session:
         return redirect(url_for('home'))
@@ -139,21 +158,36 @@ def process_frame():
     return jsonify(response)
 
 @app.route('/report')
+@login_required
 def report():
     if 'user_id' not in session:
-        return redirect(url_for('home'))
-    
+        flash("Login required to view report.")
+        return redirect(url_for('login'))
+
     conn = sqlite3.connect("database.db")
     c = conn.cursor()
+
+    # Get count of each emotion
     c.execute('SELECT emotion, COUNT(*) FROM emotions WHERE user_id=? GROUP BY emotion', (session['user_id'],))
-    rows = c.fetchall()
-    conn.close()
+    summary_rows = c.fetchall()
 
     emotion_counts = {label: 0 for label in labels}
-    for emotion, count in rows:
+    for emotion, count in summary_rows:
         emotion_counts[emotion] = count
 
-    return render_template('report.html', emotion_counts=emotion_counts, username=session['username'])
+    # Get timeline of emotions with timestamps
+    c.execute('SELECT timestamp, emotion FROM emotions WHERE user_id=? ORDER BY timestamp ASC', (session['user_id'],))
+    timeline_rows = c.fetchall()
+    emotion_timings = [(ts, emo) for ts, emo in timeline_rows]
+
+    conn.close()
+
+    return render_template(
+        'report.html',
+        emotion_counts=emotion_counts,
+        emotion_timings=emotion_timings,
+        username=session['username']
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
