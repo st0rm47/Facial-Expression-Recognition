@@ -1,0 +1,92 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0c172b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: #fff;
+  max-width: 430px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.form header {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #0c172b;
+}
+
+.form input {
+  height: 50px;
+  width: 100%;
+  padding: 0 15px;
+  font-size: 16px;
+  margin-bottom: 1.2rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.form input:focus {
+  border-color: #0c172b;
+  box-shadow: 0 0 5px rgba(12, 23, 43, 0.2);
+}
+
+.form input.button {
+  background-color: #0c172b;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form input.button:hover {
+  background-color: #152e4d;
+}
+
+.signup {
+  font-size: 16px;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.signup a {
+  color: #0c172b;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signup a:hover {
+  text-decoration: underline;
+}
+
+/* Flash messages styling */
+.flash {
+  list-style: none;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: #00ffb3;
+  color: #ffffff;
+  border: 1px solid #00ffb3;
+  border-radius: 5px;
+}
