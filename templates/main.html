@@ -1,16 +1,24 @@
-{% extends "base.html" %} 
-{% block title %} ExpressAI {%endblock %} 
+{% extends "base.html" %}
+{% block title %}ExpressAI{% endblock %}
+
 {% block content %}
 <!-- Start Header -->
-<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark">
+<nav class="custom-navbar navbar navbar-expand-md navbar-dark">
   <div class="container">
-    <a class="navbar-brand" href="{{url_for('index')}}">ExpressAI</a>
+    <a class="navbar-brand" href="{{ url_for('home') }}">ExpressAI</a>
     <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
       <li class="nav-item active">
-        <a class="nav-link" href="{{url_for('index')}}" >Home</a>
+        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
       </li>
-      <li><a class="nav-link" href="{{ url_for('demo') }}">Demo</a></li>
-      <li><a class="nav-link" href="#about" accesskey="a">About us</a></li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('demo') }}">Demo</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('report') }}">Report</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('login_page') }}">Logout</a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -19,71 +27,25 @@
 <!-- Start HERO Section -->
 <div class="hero">
   <div class="container">
-    <div class="row justify-content-between">
+    <div class="row justify-content-between align-items-center">
       <div class="col-lg-5">
         <div class="intro-excerpt">
-          <h1>Face Tracking, Analysis and Recognition</h1>
+          <h1>Face Tracking, Analysis, and Recognition</h1>
+          <p class="mb-4">Experience real-time facial expression recognition with ExpressAI powered by deep learning.</p>
           <p>
-            <a href="{{url_for('demo')}}" class="btn btn-secondary btn-lg">Try out Demo</a
-            >
+            <a href="{{ url_for('demo') }}" class="btn btn-secondary btn-lg">Try out Demo</a>&nbsp;
+            <a href = "{{ url_for('report') }}" class="btn btn-secondary btn-lg"> View Report </a>
           </p>
         </div>
       </div>
       <div class="col-lg-7">
         <div class="hero-img-wrap">
-          <img src="static/images/facial-hero1.png" class="img-fluid" />
+          <img src="{{ url_for('static', filename='images/facial-hero1.png') }}" class="img-fluid" alt="Facial Recognition Hero Image" />
         </div>
       </div>
     </div>
   </div>
 </div>
 <!-- End Hero Section -->
-
-<!-- Start About Us Section -->
-<div class="about-section" aria-labelledby="about">
-  <div class="container">
-    <div class="row mb-5">
-      <div class="col-md-6">
-        <h1 class="section-title" id= "about">About Us</h1>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
-        <div class="post-entry">
-          <a href="#" class="post-thumbnail"
-            ><img src="static/images/post-1.jpg" alt="Image" class="img-fluid"/></a>
-          <div class="post-content-entry">
-            <h3><a href="#" class="nav-link">Priyanka Thapa</a></h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
-        <div class="post-entry">
-          <a href="#" class="post-thumbnail"
-            ><img src="static/images/post-2.jpg" alt="Image" class="img-fluid"
-          /></a>
-          <div class="post-content-entry">
-            <h3><a href="#" class="nav-link">Subodh Ghimire</a></h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
-        <div class="post-entry">
-          <a href="#" class="post-thumbnail"
-            ><img src="static/images/post-3.jpg" alt="Image" class="img-fluid"
-          /></a>
-          <div class="post-content-entry">
-            <h3><a href="#" class="nav-link" >Rohan Basnet</a></h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End About Us Section -->
-
 
 {% endblock %}

@@ -3,17 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Emotion Report</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}">
 </head>
 <body>
     <div class="container">
-        <h2>Emotion Report for {{ username }}</h2>
-        <ul>
-            {% for emotion, count in emotion_counts.items() %}
-                <li><strong>{{ emotion }}</strong>: {{ count }}</li>
-            {% endfor %}
-        </ul>
-        <br>
+        <h2>Expression Report for {{ username }}</h2>
+
+        <!-- Emotion Summary -->
+        <div class="summary-card">
+            <h3>Expression Summary</h3>
+            <ul class="summary-list">
+                {% for emotion, count in emotion_counts.items() %}
+                    <li><strong>{{ emotion }}</strong>: {{ count }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Emotion Timeline -->
+        <div class="timeline-container">
+            <h3>Expression Timeline</h3>
+            {% if emotion_timings %}
+                <table class="timeline-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Expression</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ts, emotion in emotion_timings %}
+                            {% set date_part, time_part = ts.split(' ') %}
+                            <tr>
+                                <td>{{ date_part }}</td>
+                                <td>{{ time_part }}</td>
+                                <td><strong>{{ emotion }}</strong></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No emotions recorded yet.</p>
+            {% endif %}
+        </div>
+
         <a href="/demo">Back to Demo</a> | <a href="/logout">Logout</a>
     </div>
 </body>
