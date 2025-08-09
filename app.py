@@ -5,7 +5,8 @@ from flask import Flask, request, jsonify, render_template, redirect, url_for, s
 import base64
 import sqlite3
 from datetime import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash,
+check_password_hash
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = 'your_secret_key_here'
